@@ -1,0 +1,13 @@
+langchain
+langchain-core
+langgraph
+langchain-google-genai
+langchain-groq
+langchain-community
+faiss-cpu
+tiktoken 
+pydantic
+typing-extensions
+streamlit
+python-dotenv
+

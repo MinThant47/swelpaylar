@@ -13,38 +13,36 @@ import uuid
 import time
 
 controller = CookieController()
-
-# Get the user_id from the cookie
 user_id = controller.get("user_id")
 
-# Initialize session state variables
+# --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
 if "cookie_check_start_time" not in st.session_state:
     st.session_state.cookie_check_start_time = time.time()
 
-# If not initialized, check user_id
+# --- Cookie waiting logic
 if not st.session_state.initialized:
     if user_id is None:
         elapsed = time.time() - st.session_state.cookie_check_start_time
 
         if elapsed < 3:
             st.write("⏳ Waiting for cookie system to initialize...")
-            st.rerun()  # Allows time to pass and recheck
+            st.stop()
         else:
-            # Waited long enough, still None — generate a new ID
+            # Still no cookie after 3 seconds – create a new user_id
             user_id = str(uuid.uuid4())
             controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
     elif user_id == "":
-        # Cookie is empty, generate new ID
+        # Empty cookie — treat as new user
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id
         st.session_state.initialized = True
     else:
-        # Valid user ID exists
+        # Valid cookie present
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 else:

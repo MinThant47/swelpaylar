@@ -54,41 +54,47 @@ import uuid
 
 import time
 
-# Try to get the user_id from the cookie
+# Step 1: Try to get the user_id from the cookie
 user_id = controller.get("user_id")
 
-# If not initialized yet, we handle setup
+# Step 2: Handle first-time logic
+if 'initialized' not in st.session_state:
+    st.session_state.initialized = False
+if 'cookie_wait_count' not in st.session_state:
+    st.session_state.cookie_wait_count = 0
+if 'force_new_user' not in st.session_state:
+    st.session_state.force_new_user = False
+
+# Step 3: Initialization logic
 if not st.session_state.initialized:
-    wait_count = st.session_state.get("cookie_wait_count", 0)
+    wait_count = st.session_state.cookie_wait_count
 
     if user_id is None:
         if wait_count < 3:
-            # Still waiting for cookie to load
-            st.session_state.cookie_wait_count = wait_count + 1
+            st.session_state.cookie_wait_count += 1
             st.write(f"⏳ Waiting for cookie system to initialize... ({wait_count + 1}/3)")
-            time.sleep(1)  # Sleep 1 second to allow cookie system to catch up
             st.experimental_rerun()
         else:
-            # Assume no cookie will come - new user
-            user_id = str(uuid.uuid4())
-            controller.set("user_id", user_id)
-            st.session_state.user_id = user_id
-            st.session_state.initialized = True
+            # If we've waited 3 times, assume this is a new user
+            st.session_state.force_new_user = True
+            st.experimental_rerun()
 
-    elif user_id == "":
-        # Cookie is present but not set
-        user_id = str(uuid.uuid4())
-        controller.set("user_id", user_id)
-        st.session_state.user_id = user_id
+    elif user_id == "" or st.session_state.force_new_user:
+        # Either cookie is blank, or we're forcing new user
+        new_user_id = str(uuid.uuid4())
+        controller.set("user_id", new_user_id)
+        st.session_state.user_id = new_user_id
         st.session_state.initialized = True
+        st.experimental_rerun()  # rerun once cookie is set
 
     else:
-        # Cookie successfully loaded with value
+        # Cookie loaded correctly
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 
 else:
     user_id = st.session_state.user_id
+
 
 
 st.write("user_id (raw):", user_id)

@@ -88,7 +88,7 @@ else:
 
 
 st.write("user_id (raw):", user_id)
-st.write("Wait count:", st.session_state.cookie_wait_count)
+st.write("Wait count:", st.session_state.cookie_check_start_time)
 
 
 if 'chat_history' not in st.session_state:

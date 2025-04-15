@@ -15,10 +15,10 @@ controller = CookieController()
 
 cookies = controller.getAll()
 
-await user_id = controller.get("user_id")
+user_id = controller.get("user_id")
 st.write(user_id)
 
-if user_id == "":
+if not user_id:
     user_id = str(uuid.uuid4())
     controller.set("user_id", user_id) 
     st.write("New user ID: "+user_id)

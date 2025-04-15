@@ -73,11 +73,10 @@ if not st.session_state.initialized:
         if wait_count < 3:
             st.session_state.cookie_wait_count += 1
             st.write(f"⏳ Waiting for cookie system to initialize... ({wait_count + 1}/3)")
-            st.experimental_rerun()
+
         else:
             # If we've waited 3 times, assume this is a new user
             st.session_state.force_new_user = True
-            st.experimental_rerun()
 
     elif user_id == "" or st.session_state.force_new_user:
         # Either cookie is blank, or we're forcing new user
@@ -85,7 +84,6 @@ if not st.session_state.initialized:
         controller.set("user_id", new_user_id)
         st.session_state.user_id = new_user_id
         st.session_state.initialized = True
-        st.experimental_rerun()  # rerun once cookie is set
 
     else:
         # Cookie loaded correctly

@@ -30,7 +30,7 @@ if not st.session_state.initialized:
 
         if elapsed < 3:
             st.write("⏳ Waiting for cookie system to initialize...")
-            st.experimental_rerun()  # Allows time to pass and recheck
+            st.rerun()  # Allows time to pass and recheck
         else:
             # Waited long enough, still None — generate a new ID
             user_id = str(uuid.uuid4())

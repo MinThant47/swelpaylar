@@ -11,7 +11,7 @@ st.write("မင်္ဂလာပါခင်ဗျ။ Swel Pay Lar - ဆွဲ
 from streamlit_cookies_controller import CookieController
 import uuid
 
-# controller = CookieController()
+controller = CookieController()
 
 # # Initialize flags on first run
 # if 'initialized' not in st.session_state:

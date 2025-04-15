@@ -28,21 +28,22 @@ if not st.session_state.initialized:
 
         if elapsed < 3:
             st.write("⏳ Waiting for cookie system to initialize...")
-            st.stop()
+            time.sleep(1)  # Give browser time to set cookie
+            st.rerun()
         else:
             # Still no cookie after 3 seconds – create a new user_id
             user_id = str(uuid.uuid4())
             controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
+
     elif user_id == "":
-        # Empty cookie — treat as new user
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id
         st.session_state.initialized = True
+
     else:
-        # Valid cookie present
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 else:

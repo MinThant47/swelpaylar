@@ -11,10 +11,6 @@ st.write("မင်္ဂလာပါခင်ဗျ။ Swel Pay Lar - ဆွဲ
 from streamlit_cookies_controller import CookieController
 import uuid
 
-
-from streamlit_cookies_controller import CookieController
-import uuid
-
 controller = CookieController()
 
 # Initialize flags on first run
@@ -34,6 +30,7 @@ if not st.session_state.initialized:
         if wait_count < 5:
             st.write("⏳ Waiting for cookie system to initialize...")
             st.session_state.cookie_wait_count = wait_count + 1
+            st.stop()
         else:
             # Assume no cookie will come, generate new user ID
             user_id = str(uuid.uuid4())

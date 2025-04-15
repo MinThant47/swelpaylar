@@ -29,7 +29,8 @@ st.session_state.user_id = user_id
 if 'chat_history' not in st.session_state:
     with st.spinner("Loading chat history..."):
         st.session_state.msg_to_show = []
-        st.session_state.chat_history = load_chat_from_redis(user_id)
+        if user_id != "" and user_id != None:
+            st.session_state.chat_history = load_chat_from_redis(user_id)
 
         history = st.session_state.chat_history
         for i in range(0, len(history), 2):

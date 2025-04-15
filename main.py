@@ -13,6 +13,41 @@ import uuid
 
 controller = CookieController()
 
+# Get the user_id from the cookie
+user_id = controller.get("user_id")
+
+# Initialize session state variables
+if "initialized" not in st.session_state:
+    st.session_state.initialized = False
+if "cookie_check_start_time" not in st.session_state:
+    st.session_state.cookie_check_start_time = time.time()
+
+# If not initialized, check user_id
+if not st.session_state.initialized:
+    if user_id is None:
+        elapsed = time.time() - st.session_state.cookie_check_start_time
+
+        if elapsed < 3:
+            st.write("⏳ Waiting for cookie system to initialize...")
+            st.experimental_rerun()  # Allows time to pass and recheck
+        else:
+            # Waited long enough, still None — generate a new ID
+            user_id = str(uuid.uuid4())
+            controller.set("user_id", user_id)
+            st.session_state.user_id = user_id
+            st.session_state.initialized = True
+    elif user_id == "":
+        # Cookie is empty, generate new ID
+        user_id = str(uuid.uuid4())
+        controller.set("user_id", user_id)
+        st.session_state.user_id = user_id
+        st.session_state.initialized = True
+    else:
+        # Valid user ID exists
+        st.session_state.user_id = user_id
+        st.session_state.initialized = True
+else:
+    user_id = st.session_state.user_id
 # # Initialize flags on first run
 # if 'initialized' not in st.session_state:
 #     st.session_state.initialized = False
@@ -51,48 +86,6 @@ controller = CookieController()
 #         st.session_state.initialized = True
 # else:
 #     user_id = st.session_state.user_id
-
-import time
-
-# Step 1: Try to get the user_id from the cookie
-user_id = controller.get("user_id")
-
-# Step 2: Handle first-time logic
-if 'initialized' not in st.session_state:
-    st.session_state.initialized = False
-if 'cookie_wait_count' not in st.session_state:
-    st.session_state.cookie_wait_count = 0
-if 'force_new_user' not in st.session_state:
-    st.session_state.force_new_user = False
-
-# Step 3: Initialization logic
-if not st.session_state.initialized:
-    wait_count = st.session_state.cookie_wait_count
-
-    if user_id is None:
-        if wait_count < 3:
-            st.session_state.cookie_wait_count += 1
-            st.write(f"⏳ Waiting for cookie system to initialize... ({wait_count + 1}/3)")
-
-        else:
-            # If we've waited 3 times, assume this is a new user
-            st.session_state.force_new_user = True
-
-    elif user_id == "" or st.session_state.force_new_user:
-        # Either cookie is blank, or we're forcing new user
-        new_user_id = str(uuid.uuid4())
-        controller.set("user_id", new_user_id)
-        st.session_state.user_id = new_user_id
-        st.session_state.initialized = True
-
-    else:
-        # Cookie loaded correctly
-        st.session_state.user_id = user_id
-        st.session_state.initialized = True
-
-else:
-    user_id = st.session_state.user_id
-
 
 
 st.write("user_id (raw):", user_id)

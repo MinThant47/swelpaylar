@@ -20,7 +20,7 @@ prompt = {
         for e.g. "Swel Pay Lar က ဘာလဲ" "ဘာဝန်ဆောင်မှုတွေရှိလဲ"
         Please only provide responses based on the context: {context}.
         Don't make up or change any information.
-        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ နောက်မှ ပြန်မေးပေးပါနော်။"
+        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ Page CB မှာမေးပေးပါနော်။"
         But don't say words like according to provided text.
         Please reply only in BURMESE."""),
         MessagesPlaceholder(variable_name="chat_history"),
@@ -54,7 +54,7 @@ prompt = {
         You have to provide information about printing design related questions only based on the context: {context}.
         Don't make up or change any information.
         for e.g. "Pamphlet Design တွေက ဘယ်လိုယူလဲ" "Pamphlet ဈေးဘယ်လိုယူလဲ" "Business Card Design ဆွဲပေးလား"
-        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ နောက်မှ ပြန်မေးပေးပါနော်။"
+        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ Page CB မှာမေးပေးပါနော်။"
         But don't say words like according to provided text.
         Please reply only in BURMESE."""),
         MessagesPlaceholder(variable_name="chat_history"),
@@ -100,5 +100,4 @@ route_prompt = ChatPromptTemplate.from_messages(
         ("human", "{question}"),
     ]
 )
-
 question_router = route_prompt | structured_llm_router

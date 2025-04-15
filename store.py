@@ -23,7 +23,8 @@ def vector_embedding(file_path, name):
     vectors.save_local("faiss_index",name)
     return vectors
 
-# vectors = vector_embedding(r"files\SPLFAQ.txt","SPLFAQ")
+vectors = vector_embedding(r"files\SPLFAQ.txt","SPLFAQ")
 vectors2 = vector_embedding(r"files\SPLLogo.txt","SPLLogo")
-# vectors3 = vector_embedding(r"files\SPLSocialAds.txt","SPLSocialAds")
-# vectors4 = vector_embedding(r"files\SPLPrinting.txt","SPLPrinting")
+vectors3 = vector_embedding(r"files\SPLSocialAds.txt","SPLSocialAds")
+vectors4 = vector_embedding(r"files\SPLPrinting.txt","SPLPrinting")
+>>>>>>> 6c28fa8 (updated multiple users)

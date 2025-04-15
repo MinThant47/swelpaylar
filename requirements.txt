@@ -10,4 +10,4 @@ pydantic
 typing-extensions
 streamlit
 python-dotenv
-
+upstash-redis

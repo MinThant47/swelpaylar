@@ -53,6 +53,8 @@ if not st.session_state.initialized:
 else:
     user_id = st.session_state.user_id
 
+st.write("user_id (raw):", user_id)
+st.write("Wait count:", st.session_state.cookie_wait_count)
 
 
 if 'chat_history' not in st.session_state:

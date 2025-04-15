@@ -29,25 +29,28 @@ user_id = controller.get("user_id")
 # If not initialized yet, we handle setup
 if not st.session_state.initialized:
     if user_id is None:
-        st.session_state.cookie_wait_count += 1
+        wait_count = st.session_state.get("cookie_wait_count", 0)
 
-        if st.session_state.cookie_wait_count < 5:
+        if wait_count < 5:
             st.write("⏳ Waiting for cookie system to initialize...")
+            st.session_state.cookie_wait_count = wait_count + 1
             st.stop()
         else:
-            # Waited long enough, assume no cookie exists
+            # Assume no cookie will come, generate new user ID
             user_id = str(uuid.uuid4())
             controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
+
     elif user_id == "":
-        # Cookie is ready but no user ID was set yet
+        # Cookie is ready, but no ID set
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id
         st.session_state.initialized = True
+
     else:
-        # Cookie exists with a valid user_id
+        # Valid user_id from cookie
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 else:

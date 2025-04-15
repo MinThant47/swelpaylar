@@ -10,6 +10,7 @@ st.write("မင်္ဂလာပါခင်ဗျ။ Swel Pay Lar - ဆွဲ
 
 from streamlit_cookies_controller import CookieController
 import uuid
+import time
 
 controller = CookieController()
 

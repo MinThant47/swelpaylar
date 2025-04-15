@@ -18,7 +18,7 @@ cookies = controller.getAll()
 user_id = controller.get("user_id")
 st.write(user_id)
 
-if user_id == "" or user_id == None:
+if user_id == "":
     user_id = str(uuid.uuid4())
     controller.set("user_id", user_id) 
     st.write("New User ID:" +user_id)

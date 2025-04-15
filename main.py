@@ -11,34 +11,74 @@ st.write("မင်္ဂလာပါခင်ဗျ။ Swel Pay Lar - ဆွဲ
 from streamlit_cookies_controller import CookieController
 import uuid
 
+
 controller = CookieController()
 
-cookies = controller.getAll()
+if 'initialized' not in st.session_state:
+    st.session_state.initialized = False
 
 user_id = controller.get("user_id")
-st.write(user_id)
 
-if user_id == "":
-    user_id = str(uuid.uuid4())
-    controller.set("user_id", user_id) 
-    st.write("New User ID:" +user_id)
+if not st.session_state.initialized:
+    if user_id is None:
+        st.write("Waiting for cookie to initialize...")
+        st.stop()  # Let Streamlit re-run on next cycle
 
-st.session_state.user_id = user_id
+    if user_id == "":
+        user_id = str(uuid.uuid4())
+        controller.set("user_id", user_id)
+        st.session_state.user_id = user_id
+        st.session_state.initialized = True
+        st.stop()  # Stop here and let it re-run with cookie properly set
+    else:
+        st.session_state.user_id = user_id
+        st.session_state.initialized = True
+else:
+    user_id = st.session_state.user_id
 
 
 if 'chat_history' not in st.session_state:
     with st.spinner("Loading chat history..."):
         st.session_state.msg_to_show = []
-        if user_id != "" and user_id != None:
-            st.session_state.chat_history = load_chat_from_redis(user_id)
+        st.session_state.chat_history = []
 
-            history = st.session_state.chat_history
+        history = load_chat_from_redis(user_id)
+        if history:
+            st.session_state.chat_history = history
             for i in range(0, len(history), 2):
-                if i+1 < len(history):
+                if i + 1 < len(history):
                     st.session_state.msg_to_show.append({
                         'human': history[i].content,
                         'AI': history[i+1].content
                     })
+
+
+# controller = CookieController()
+
+# cookies = controller.getAll()
+
+# user_id = controller.get("user_id")
+
+# if user_id == "":
+#     user_id = str(uuid.uuid4())
+#     controller.set("user_id", user_id) 
+
+# st.session_state.user_id = user_id
+
+
+# if 'chat_history' not in st.session_state:
+#     with st.spinner("Loading chat history..."):
+#         st.session_state.msg_to_show = []
+#         if user_id != "" and user_id != None:
+#             st.session_state.chat_history = load_chat_from_redis(user_id)
+
+#             history = st.session_state.chat_history
+#             for i in range(0, len(history), 2):
+#                 if i+1 < len(history):
+#                     st.session_state.msg_to_show.append({
+#                         'human': history[i].content,
+#                         'AI': history[i+1].content
+#                     })
 
 st.write("")
 final_text = ""

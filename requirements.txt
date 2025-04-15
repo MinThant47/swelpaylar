@@ -11,3 +11,4 @@ typing-extensions
 streamlit
 python-dotenv
 upstash-redis
+streamlit_extras

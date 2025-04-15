@@ -12,29 +12,47 @@ from streamlit_cookies_controller import CookieController
 import uuid
 
 
+from streamlit_cookies_controller import CookieController
+import uuid
+
 controller = CookieController()
 
+# Initialize flags on first run
 if 'initialized' not in st.session_state:
     st.session_state.initialized = False
+if 'cookie_wait_count' not in st.session_state:
+    st.session_state.cookie_wait_count = 0
 
+# Try to get the user_id from the cookie
 user_id = controller.get("user_id")
 
+# If not initialized yet, we handle setup
 if not st.session_state.initialized:
     if user_id is None:
-        st.write("Waiting for cookie to initialize...")
-        st.stop()  # Let Streamlit re-run on next cycle
+        st.session_state.cookie_wait_count += 1
 
-    if user_id == "":
+        if st.session_state.cookie_wait_count < 5:
+            st.write("⏳ Waiting for cookie system to initialize...")
+            st.stop()
+        else:
+            # Waited long enough, assume no cookie exists
+            user_id = str(uuid.uuid4())
+            controller.set("user_id", user_id)
+            st.session_state.user_id = user_id
+            st.session_state.initialized = True
+    elif user_id == "":
+        # Cookie is ready but no user ID was set yet
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id
         st.session_state.initialized = True
-        st.stop()  # Stop here and let it re-run with cookie properly set
     else:
+        # Cookie exists with a valid user_id
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 else:
     user_id = st.session_state.user_id
+
 
 
 if 'chat_history' not in st.session_state:

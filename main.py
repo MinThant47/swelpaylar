@@ -34,7 +34,6 @@ if not st.session_state.initialized:
         if wait_count < 5:
             st.write("⏳ Waiting for cookie system to initialize...")
             st.session_state.cookie_wait_count = wait_count + 1
-            st.stop()
         else:
             # Assume no cookie will come, generate new user ID
             user_id = str(uuid.uuid4())

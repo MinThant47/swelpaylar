@@ -15,7 +15,7 @@ controller = CookieController()
 
 cookies = controller.getAll()
 
-user_id = controller.get("user_id")
+await user_id = controller.get("user_id")
 st.write(user_id)
 
 if user_id == "":

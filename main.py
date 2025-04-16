@@ -13,8 +13,10 @@ import uuid
 import time
 
 controller = CookieController()
-user_id = controller.get("user_id")
-
+try:
+    user_id = controller.get("user_id")
+except TypeError:
+    user_id = None
 # --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False

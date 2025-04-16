@@ -34,12 +34,16 @@ if not st.session_state.initialized:
             st.rerun()
         else:
             # Still no cookie after 3 seconds – create a new user_id
+            if controller._CookieController__cookies is None:
+                controller._CookieController__cookies = {}
             user_id = str(uuid.uuid4())
             controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
 
     elif user_id == "":
+        if controller._CookieController__cookies is None:
+            controller._CookieController__cookies = {}
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id

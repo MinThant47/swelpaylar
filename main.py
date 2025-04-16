@@ -13,10 +13,9 @@ import uuid
 import time
 
 controller = CookieController()
-try:
-    user_id = controller.get("user_id")
-except TypeError:
-    user_id = None
+
+user_id = controller.get("user_id")
+
 # --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
@@ -34,16 +33,12 @@ if not st.session_state.initialized:
             st.rerun()
         else:
             # Still no cookie after 3 seconds – create a new user_id
-            if controller._CookieController__cookies is None:
-                controller._CookieController__cookies = {}
             user_id = str(uuid.uuid4())
             controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
 
     elif user_id == "":
-        if controller._CookieController__cookies is None:
-            controller._CookieController__cookies = {}
         user_id = str(uuid.uuid4())
         controller.set("user_id", user_id)
         st.session_state.user_id = user_id
@@ -54,49 +49,7 @@ if not st.session_state.initialized:
         st.session_state.initialized = True
 else:
     user_id = st.session_state.user_id
-# # Initialize flags on first run
-# if 'initialized' not in st.session_state:
-#     st.session_state.initialized = False
-# if 'cookie_wait_count' not in st.session_state:
-#     st.session_state.cookie_wait_count = 0
-
-# # Try to get the user_id from the cookie
-# user_id = controller.get("user_id")
-
-# # If not initialized yet, we handle setup
-# if not st.session_state.initialized:
-#     if user_id is None:
-#         wait_count = st.session_state.get("cookie_wait_count", 0)
-
-#         if wait_count < 5:
-#             st.write("⏳ Waiting for cookie system to initialize...")
-#             st.session_state.cookie_wait_count = wait_count + 1
-#             st.stop()
-#         else:
-#             # Assume no cookie will come, generate new user ID
-#             user_id = str(uuid.uuid4())
-#             controller.set("user_id", user_id)
-#             st.session_state.user_id = user_id
-#             st.session_state.initialized = True
-
-#     elif user_id == "":
-#         # Cookie is ready, but no ID set
-#         user_id = str(uuid.uuid4())
-#         controller.set("user_id", user_id)
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-
-#     else:
-#         # Valid user_id from cookie
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-# else:
-#     user_id = st.session_state.user_id
-
-
-# st.write("user_id (raw):", user_id)
-# st.write("Wait count:", st.session_state.cookie_check_start_time)
-
+    
 
 if 'chat_history' not in st.session_state:
     with st.spinner("Loading chat history..."):
@@ -113,33 +66,6 @@ if 'chat_history' not in st.session_state:
                         'AI': history[i+1].content
                     })
 
-
-# controller = CookieController()
-
-# cookies = controller.getAll()
-
-# user_id = controller.get("user_id")
-
-# if user_id == "":
-#     user_id = str(uuid.uuid4())
-#     controller.set("user_id", user_id) 
-
-# st.session_state.user_id = user_id
-
-
-# if 'chat_history' not in st.session_state:
-#     with st.spinner("Loading chat history..."):
-#         st.session_state.msg_to_show = []
-#         if user_id != "" and user_id != None:
-#             st.session_state.chat_history = load_chat_from_redis(user_id)
-
-#             history = st.session_state.chat_history
-#             for i in range(0, len(history), 2):
-#                 if i+1 < len(history):
-#                     st.session_state.msg_to_show.append({
-#                         'human': history[i].content,
-#                         'AI': history[i+1].content
-#                     })
 
 st.write("")
 final_text = ""

@@ -128,19 +128,19 @@ button:focus:not(:focus-visible) {
     filter: url(#drop-shadow-1) !important;
 }
 
-.st-cj{
+.st-cp{
 border-bottom-color: #e58013 !important;
 }
 
-.st-ci{
+.st-co{
 border-top-color: #e58013 !important;
 }
 
-.st-ch{
+.st-cm{
 border-right-color: #e58013 !important;
 }
 
-.st-cg{
+.st-cn{
 border-left-color: #e58013 !important;
 }
 

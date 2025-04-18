@@ -128,6 +128,26 @@ button:focus:not(:focus-visible) {
     filter: url(#drop-shadow-1) !important;
 }
 
+.st-c5{
+border-bottom-color: #e58013 !important;
+}
+
+.st-c4{
+border-top-color: #e58013 !important;
+}
+
+.st-c3{
+border-right-color: #e58013 !important;
+}
+
+.st-c2{
+border-left-color: #e58013 !important;
+}
+
+.st-emotion-cache-1wi2cd3:hover{
+background-color: #e58013 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 

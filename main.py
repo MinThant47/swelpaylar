@@ -156,7 +156,7 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-         background-image: url("https://media-hosting.imagekit.io/09eeae400bed44a3/77646058_SL-072622-51930-04.jpg?Expires=1839562364&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=zxXvuIKavWvrk5CbfP-h59NW3BgTtkdfXMvC06JahQ3N6CX3R2I4izai-2C8IymOl1DiRZsfFYK9Eh9o5bWTUt~jZjqSqYRusQ3ub7Cvhmzq1KGvXE1wWeTXuxMZCy-tBCumt8mkUGRjB7HpjoXxeFBSE9kChz91YoezQrTej21f-vQ3POjbBkIuRQTp~vUadlLRBQ1aTHMFzWxq2vVcjMX6VfxxEdmalX4DGUVxUQb6ZCDu2Pe-OkSt4ISjbmbnG1-O19j66OSX04ybV2quzC3pALPSjHRhGTVf2kE0PejGikbvwlQ21qPiN6c5x1T8dbdiFBXi~aFmWb95xja-Cw__");
+         background-image: url("https://media-hosting.imagekit.io/1527acfd1d6e4fba/Artboard%201%20copy%205.jpg?Expires=1839587986&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=iMiIOt1Q36Zal392CYpFzQdiEJYb1lv3lx965gDWboyXqFjjDWug0~r3W~9wQL88XR5Vb64LlDnuS08KpyXCOwtZniJuws93po34vrftaI8krR6mdVsvePXXk4iHSGB0CF3NrP1moECuoVHvZG0fhZ0L77zSgqC459xr5gRzCdtfOeHQ5qdRfeImeWwvpXEg8xdMSi7KO0JODE7i51WJ-nK-UT7e-9LillOqXTlBNp5qDIGNtrg-gukKQL7H2NPK2y18iGB4Jl~9ELjmHILb~P8U13Q1x1mk~fuiultF1FphRRQRSSEmGR46tFS58hXT4Mz4xmV58aWGoWZ7Nut8wg__");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -167,57 +167,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# controller = CookieController()
-# user_id = controller.get("user_id")
-
-# # --- Session state setup
-# if "initialized" not in st.session_state:
-#     st.session_state.initialized = False
-# if "cookie_check_start_time" not in st.session_state:
-#     st.session_state.cookie_check_start_time = time.time()
-
-# # --- Cookie waiting logic
-# if not st.session_state.initialized:
-#     if user_id is None:
-#         elapsed = time.time() - st.session_state.cookie_check_start_time
-
-#         if elapsed < 3:
-#             st.write("⏳ Please wait...")
-#             time.sleep(1)  # Give browser time to set cookie
-#             st.rerun()
-#         else:
-#             # Still no cookie after 3 seconds – create a new user_id
-#             user_id = str(uuid.uuid4())
-#             controller.set("user_id", user_id)
-#             st.session_state.user_id = user_id
-#             st.session_state.initialized = True
-
-#     elif user_id == "":
-#         user_id = str(uuid.uuid4())
-#         controller.set("user_id", user_id)
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-
-#     else:
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-# else:
-#     user_id = st.session_state.user_id
-
-# Cookie handling
 controller = CookieController()
+user_id = controller.get("user_id")
 
 # --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
 if "cookie_check_start_time" not in st.session_state:
     st.session_state.cookie_check_start_time = time.time()
-
-# Try to get the user_id cookie
-try:
-    user_id = controller.get("user_id")
-except Exception:
-    user_id = None
 
 # --- Cookie waiting logic
 if not st.session_state.initialized:
@@ -231,21 +188,13 @@ if not st.session_state.initialized:
         else:
             # Still no cookie after 3 seconds – create a new user_id
             user_id = str(uuid.uuid4())
-            try:
-                controller.set("user_id", user_id)
-            except Exception:
-                # Handle case where cookie can't be set
-                pass
+            controller.set("user_id", user_id)
             st.session_state.user_id = user_id
             st.session_state.initialized = True
 
     elif user_id == "":
         user_id = str(uuid.uuid4())
-        try:
-            controller.set("user_id", user_id)
-        except Exception:
-            # Handle case where cookie can't be set
-            pass
+        controller.set("user_id", user_id)
         st.session_state.user_id = user_id
         st.session_state.initialized = True
 
@@ -254,6 +203,57 @@ if not st.session_state.initialized:
         st.session_state.initialized = True
 else:
     user_id = st.session_state.user_id
+
+# # Cookie handling
+# controller = CookieController()
+
+# # --- Session state setup
+# if "initialized" not in st.session_state:
+#     st.session_state.initialized = False
+# if "cookie_check_start_time" not in st.session_state:
+#     st.session_state.cookie_check_start_time = time.time()
+
+# # Try to get the user_id cookie
+# try:
+#     user_id = controller.get("user_id")
+# except Exception:
+#     user_id = None
+
+# # --- Cookie waiting logic
+# if not st.session_state.initialized:
+#     if user_id is None:
+#         elapsed = time.time() - st.session_state.cookie_check_start_time
+
+#         if elapsed < 3:
+#             st.write("⏳ Please wait...")
+#             time.sleep(1)  # Give browser time to set cookie
+#             st.rerun()
+#         else:
+#             # Still no cookie after 3 seconds – create a new user_id
+#             user_id = str(uuid.uuid4())
+#             try:
+#                 controller.set("user_id", user_id)
+#             except Exception:
+#                 # Handle case where cookie can't be set
+#                 pass
+#             st.session_state.user_id = user_id
+#             st.session_state.initialized = True
+
+#     elif user_id == "":
+#         user_id = str(uuid.uuid4())
+#         try:
+#             controller.set("user_id", user_id)
+#         except Exception:
+#             # Handle case where cookie can't be set
+#             pass
+#         st.session_state.user_id = user_id
+#         st.session_state.initialized = True
+
+#     else:
+#         st.session_state.user_id = user_id
+#         st.session_state.initialized = True
+# else:
+#     user_id = st.session_state.user_id
 
     
 if 'chat_history' not in st.session_state:

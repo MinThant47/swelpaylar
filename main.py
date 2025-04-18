@@ -9,8 +9,8 @@ import time
 from redis_test import load_chat_from_redis, save_chat_to_redis, clear_chat_from_redis
 
 # Set the page configuration
-st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered")
-
+# st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered")
+st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered" page_icon=f"assets\\Profile Photo.png")
 # Add custom styles for chat UI
 st.markdown("""
 <style>

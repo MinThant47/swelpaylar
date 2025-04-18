@@ -37,6 +37,7 @@ prompt = {
         DON'T MAKE UP OR CHANGE ANY INFORMATION, ESPECIALLY THE PRICING!
         for e.g. "Logo fee တွေ ဘယ်လိုရှိလဲ" "Logo Package တွေက ဘာတွေလဲ"
         But don't say words like according to provided text.
+        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ Page CB မှာမေးပေးပါနော်။"
         Please reply only in BURMESE."""),
         MessagesPlaceholder(variable_name="chat_history"),
         ("human", "{input}")
@@ -48,6 +49,7 @@ prompt = {
         DON'T MAKE UP OR CHANGE ANY INFORMATION, ESPECIALLY THE PRICING!
         for e.g. "Social ads fee တွေ ဘယ်လိုရှိလဲ" "Social media design package/ Social ads package တွေက ဘာတွေလဲ"
         If user ask about "Boosting", just say sorry we don't do boosting.
+        If you don't find the related answer, just say "တောင်းပန်ပါတယ်။ လက်ရှိမှာ အဲ့မေးခွန်းအတွက် ပြင်ဆင်နေဆဲဖြစ်လို့ Page CB မှာမေးပေးပါနော်။"
         But don't say words like according to provided text.
         Please reply only in BURMESE."""),
         MessagesPlaceholder(variable_name="chat_history"),

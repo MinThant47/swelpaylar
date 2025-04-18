@@ -187,8 +187,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-controller = CookieController()
-user_id = controller.get("user_id")
+# controller = CookieController()
+# user_id = controller.get("user_id")
 
 # # --- Session state setup
 # if "initialized" not in st.session_state:

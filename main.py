@@ -145,7 +145,7 @@ border-left-color: #e58013 !important;
 }
 
 .st-emotion-cache-1f3w014:hover{
-background-color: #e58013 !important;
+color: #e58013 !important;
 }
 
 </style>

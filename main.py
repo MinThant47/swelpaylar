@@ -249,13 +249,14 @@ if not st.session_state.initialized:
             elapsed = time.time() - st.session_state.cookie_check_start_time
             
             # Wait up to 5 seconds with multiple attempts
-            if elapsed < 5 and st.session_state.cookie_check_attempts < 5:
+            if elapsed < 10 and st.session_state.cookie_check_attempts < 10:
                 st.write(f"⏳ Loading your session... (attempt {st.session_state.cookie_check_attempts})")
                 time.sleep(1)
                 st.rerun()
             else:
                 # After waiting, create a new user_id
                 user_id = str(uuid.uuid4())
+                st.write(user_id);
                 try:
                     controller.set("user_id", user_id)
                 except Exception:

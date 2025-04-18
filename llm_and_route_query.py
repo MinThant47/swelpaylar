@@ -5,7 +5,11 @@ from typing import Literal
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 
-os.environ["GOOGLE_API_KEY"]= "AIzaSyC87rM9xeEqJ6Rt5LhguLed6QK5mzT6XBM"
+try:
+    os.environ["GOOGLE_API_KEY"]= "AIzaSyC87rM9xeEqJ6Rt5LhguLed6QK5mzT6XBM"
+except:
+    os.environ["GOOGLE_API_KEY"]= "AIzaSyBWn4Tay_jDvdtatWziBVxZ90DdoXGx5h8"
+
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash-001",

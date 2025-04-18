@@ -156,7 +156,7 @@ st.markdown(
     f"""
     <style>
     .stApp {{
-         background-image: url("https://media-hosting.imagekit.io/47867f8e1dde48d9/77928372_SL-072622-51930-16.jpg?Expires=1839562442&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=d4pSqUb-sFlpnzoBCSqnoNgHm7VA5Sem4UyGHdLnxZxNbQI154~OPCn76gzeClMmEm6u75A-BKNn9wYQ~u4AxhEdlxNtopaIVGKjka2Cv4thlXA637uK1bT6mQ4kcH49tNQ1PGdR8rMf3s04rF-ST4sartP~aEEJDLW9FthfStEoQ1RntifYz60I7dFcuc0mL~1qr5wGtNirUjLHidGYeFO41jnNBLEaPfTll6MQY0C9z4Hv~a6iinVILeBj~0c~NvJSUlLhiig2sYUyMf8S9ZaoK8HmcBT~4X4e1che0-AauApfa14Gj4iTAijsMyCjhJKPynzmep9W1k7ilyXN7w__");
+         background-image: url("https://media-hosting.imagekit.io/b84b1942f8f54657/Artboard%201%20copy%205.jpg?Expires=1839570426&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=lZBgAkgUC1c4um2XXOTplQFLlEjQVuM7xmCeMQTx5TH9RZIIU5OpACyJVQdwKeV4l6yiaPNm6YzvCa6jDZcou9fqFx-ox9mN4pH619~pyYhOo4SvvhTN3wVdZC90YMRpVKCM2V~CDvxPAndoLxUxlLAmcpm~siZqcZVNZWshC771j3uwkwSiFOENDBhTS8HMdbM1WQGy8-ondQk4UifpzM4F~dnDh9kDPkt9719wx5Odxm0jEle59dGg~4nc2EZhya-r5GI3ZHtdlgNJgEr69b8aE8M17H7-YCoqnmEhQhzxPnk2oRm~dMtlh3-wtuFCqAcXP37LDj6Nhdpf4Na0IQ__");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

@@ -221,9 +221,13 @@ if not st.session_state.initialized:
                 user_id = str(uuid.uuid4())
                 # st.write(user_id);
                 try:
-                  controller.set("user_id", user_id, 
-                   expires_at=datetime.datetime.now() + datetime.timedelta(days=3650),  # 10 years
-                   max_age=60 * 60 * 24 * 365 * 10)  # 10 years in seconds
+                  controller.set(
+                  name="user_id", 
+                  value=user_id,
+                  path="/",  # Available across your entire app
+                  expires=datetime.datetime.now() + datetime.timedelta(days=3650),  # ~10 years
+                  max_age=60 * 60 * 24 * 365 * 10,  # 10 years in seconds
+                  same_site="lax") # Less restrictive than the default 'strict'
                 except Exception:
                     # Handle case where cookies still can't be set
                     st.warning("Using temporary session. Your chat history may not persist between visits.", icon="⚠️")

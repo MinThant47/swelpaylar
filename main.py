@@ -6,10 +6,13 @@ import os
 from streamlit_cookies_controller import CookieController
 import uuid
 import time
+from datetime import datetime, timedelta, UTC
 from redis_test import load_chat_from_redis, save_chat_to_redis, clear_chat_from_redis
 
 # Set the page configuration
-st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered", page_icon=f"assets\\Profile Photo.png")
+st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered", page_icon="assets\Profile Photo.png")
+
+expire_time = datetime.now(UTC) + timedelta(days=365 * 10)
 
 # Add custom styles for chat UI
 st.markdown("""
@@ -224,10 +227,8 @@ if not st.session_state.initialized:
                   controller.set(
                   name="user_id", 
                   value=user_id,
-                  path="/",  # Available across your entire app
-                  expires=datetime.datetime.now() + datetime.timedelta(days=3650),  # ~10 years
-                  max_age=60 * 60 * 24 * 365 * 10,  # 10 years in seconds
-                  same_site="lax") # Less restrictive than the default 'strict'
+                  expires=expire_time
+                  )
                 except Exception:
                     # Handle case where cookies still can't be set
                     st.warning("Using temporary session. Your chat history may not persist between visits.", icon="⚠️")

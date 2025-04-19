@@ -187,43 +187,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# controller = CookieController()
-# user_id = controller.get("user_id")
-
-# # --- Session state setup
-# if "initialized" not in st.session_state:
-#     st.session_state.initialized = False
-# if "cookie_check_start_time" not in st.session_state:
-#     st.session_state.cookie_check_start_time = time.time()
-
-# # --- Cookie waiting logic
-# if not st.session_state.initialized:
-#     if user_id is None:
-#         elapsed = time.time() - st.session_state.cookie_check_start_time
-
-#         if elapsed < 3:
-#             st.write("⏳ Please wait...")
-#             time.sleep(1)  # Give browser time to set cookie
-#             st.rerun()
-#         else:
-#             # Still no cookie after 3 seconds – create a new user_id
-#             user_id = str(uuid.uuid4())
-#             controller.set("user_id", user_id)
-#             st.session_state.user_id = user_id
-#             st.session_state.initialized = True
-
-#     elif user_id == "":
-#         user_id = str(uuid.uuid4())
-#         controller.set("user_id", user_id)
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-
-#     else:
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-# else:
-#     user_id = st.session_state.user_id
-
 # --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
@@ -248,17 +211,19 @@ if not st.session_state.initialized:
             st.session_state.cookie_check_attempts += 1
             elapsed = time.time() - st.session_state.cookie_check_start_time
             
-            # Wait up to 5 seconds with multiple attempts
-            if elapsed < 10 and st.session_state.cookie_check_attempts < 10:
+            # Wait up to 6 seconds with multiple attempts
+            if elapsed < 6 and st.session_state.cookie_check_attempts < 6:
                 st.write(f"⏳ Loading your session... (attempt {st.session_state.cookie_check_attempts})")
                 time.sleep(1)
                 st.rerun()
             else:
                 # After waiting, create a new user_id
                 user_id = str(uuid.uuid4())
-                st.write(user_id);
+                # st.write(user_id);
                 try:
-                    controller.set("user_id", user_id)
+                  controller.set("user_id", user_id, 
+                   expires_at=datetime.datetime.now() + datetime.timedelta(days=3650),  # 10 years
+                   max_age=60 * 60 * 24 * 365 * 10)  # 10 years in seconds
                 except Exception:
                     # Handle case where cookies still can't be set
                     st.warning("Using temporary session. Your chat history may not persist between visits.", icon="⚠️")

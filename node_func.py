@@ -12,7 +12,7 @@ class State(TypedDict):
 
 def inquiry(state: State) -> State:
     question = state["question"]
-    source = question_router.invoke({"question": question})
+    source = question_router.invoke({"question": question, "chat_history":state["chat_history"]})
     if source.datasource == "FAQ":
         print("---ROUTE QUESTION TO FAQ---")
         return {"topic" : "FAQ"}
@@ -74,7 +74,7 @@ def not_found(state: State) -> State:
   print("Not Found: Out of scope")
 
   question = HumanMessage(content=state["question"] + "The answer to the question isn't available in the document.")
-  system_message = SystemMessage(content="You provides polite and concise reponse when there is no relevant information in the given documents in burmese.")
+  system_message = SystemMessage(content="You provides polite and concise reponse when there is no relevant information, please check Page CB in burmese.")
 
   response = {"input": question, "answer": llm.invoke([system_message, question]).content}
 

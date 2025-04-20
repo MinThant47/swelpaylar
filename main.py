@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, UTC
 from redis_test import load_chat_from_redis, save_chat_to_redis, clear_chat_from_redis
 
 # Set the page configuration
-st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered", page_icon="assets\Profile Photo.png")
+st.set_page_config(page_title="Swel Pay Lar Chatbot", layout="centered", page_icon=f"assets\\Profile Photo.png")
 
 expire_time = datetime.now(UTC) + timedelta(days=365 * 10)
 
@@ -131,24 +131,24 @@ button:focus:not(:focus-visible) {
     filter: url(#drop-shadow-1) !important;
 }
 
-.st-cp{
+.st-c5{
 border-bottom-color: #e58013 !important;
 }
 
-.st-co{
+.st-c4{
 border-top-color: #e58013 !important;
 }
 
-.st-cm{
+.st-c3{
 border-right-color: #e58013 !important;
 }
 
-.st-cn{
+.st-c2{
 border-left-color: #e58013 !important;
 }
 
-.st-emotion-cache-1f3w014:hover{
-color: #e58013 !important;
+.st-emotion-cache-1wi2cd3:hover{
+background-color: #e58013 !important;
 }
 
 </style>
@@ -189,6 +189,43 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# controller = CookieController()
+# user_id = controller.get("user_id")
+
+# # --- Session state setup
+# if "initialized" not in st.session_state:
+#     st.session_state.initialized = False
+# if "cookie_check_start_time" not in st.session_state:
+#     st.session_state.cookie_check_start_time = time.time()
+
+# # --- Cookie waiting logic
+# if not st.session_state.initialized:
+#     if user_id is None:
+#         elapsed = time.time() - st.session_state.cookie_check_start_time
+
+#         if elapsed < 3:
+#             st.write("⏳ Please wait...")
+#             time.sleep(1)  # Give browser time to set cookie
+#             st.rerun()
+#         else:
+#             # Still no cookie after 3 seconds – create a new user_id
+#             user_id = str(uuid.uuid4())
+#             controller.set("user_id", user_id)
+#             st.session_state.user_id = user_id
+#             st.session_state.initialized = True
+
+#     elif user_id == "":
+#         user_id = str(uuid.uuid4())
+#         controller.set("user_id", user_id)
+#         st.session_state.user_id = user_id
+#         st.session_state.initialized = True
+
+#     else:
+#         st.session_state.user_id = user_id
+#         st.session_state.initialized = True
+# else:
+#     user_id = st.session_state.user_id
 
 # --- Session state setup
 if "initialized" not in st.session_state:
@@ -287,12 +324,43 @@ with bottom():
             st.session_state.msg_to_show = []
             clear_chat_from_redis(user_id)
 
-if st.session_state.msg_to_show:
+# if st.session_state.msg_to_show:
 
+#     for msg in st.session_state.msg_to_show:
+#         st.markdown(f'<div class="chat-container"> <div class="message user-message">{msg["human"]}</div>', unsafe_allow_html=True)
+#         st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class = "avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{msg["AI"]}</div></div></div>', unsafe_allow_html=True)
+
+# For displaying existing messages
+if st.session_state.msg_to_show:
     for msg in st.session_state.msg_to_show:
         st.markdown(f'<div class="chat-container"> <div class="message user-message">{msg["human"]}</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class = "avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{msg["AI"]}</div></div></div>', unsafe_allow_html=True)
-
+        
+        # Convert markdown bullet points to HTML list
+        bot_message = msg["AI"]
+        # Replace markdown bullet points with HTML list items
+        if "- " in bot_message:
+            bot_message_parts = bot_message.split("\n")
+            formatted_parts = []
+            list_open = False
+            
+            for part in bot_message_parts:
+                if part.strip().startswith("- "):
+                    if not list_open:
+                        formatted_parts.append("<ul style='margin-top: 10px; margin-bottom: 10px; padding-left: 20px;'>")
+                        list_open = True
+                    formatted_parts.append(f"<li>{part.strip()[2:]}</li>")
+                else:
+                    if list_open:
+                        formatted_parts.append("</ul>")
+                        list_open = False
+                    formatted_parts.append(part)
+            
+            if list_open:
+                formatted_parts.append("</ul>")
+            
+            bot_message = "".join(formatted_parts)
+        
+        st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class = "avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{bot_message}</div></div></div>', unsafe_allow_html=True)
 
 if chat_text:
     final_text = chat_text
@@ -302,19 +370,44 @@ if final_text:
 
     with st.spinner("Processing..."):
         result = app.invoke({'question': final_text, 'chat_history': st.session_state.chat_history})
-
     if result:
+      bot_message = result['response']['answer']
+      # Convert markdown bullet points to HTML list
+      if "- " in bot_message:
+          bot_message_parts = bot_message.split("\n")
+          formatted_parts = []
+          list_open = False
+          
+          for part in bot_message_parts:
+              if part.strip().startswith("- "):
+                  if not list_open:
+                      formatted_parts.append("<ul style='margin-top: 10px; margin-bottom: 10px; padding-left: 20px;'>")
+                      list_open = True
+                  formatted_parts.append(f"<li>{part.strip()[2:]}</li>")
+              else:
+                  if list_open:
+                      formatted_parts.append("</ul>")
+                      list_open = False
+                  formatted_parts.append(part)
+          
+          if list_open:
+              formatted_parts.append("</ul>")
+          
+          bot_message = "".join(formatted_parts)
       
-        # st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class ="avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{result['response']['answer']}</div></div></div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class ="avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{bot_message}</div></div></div>', unsafe_allow_html=True)
+    # if result:
+      
+    #     # st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class ="avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{result['response']['answer']}</div></div></div>', unsafe_allow_html=True)
 
-        st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class ="avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{result["response"]["answer"]}</div></div></div>', unsafe_allow_html=True)
+    #     st.markdown(f'<div class="bot-container"><div class="bot-avatar"><div class="avatar-icon"><svg class ="avatar-logo" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.24 552.48"><defs><style>.cls-1{{fill:url(#linear-gradient);filter:url(#drop-shadow-1);}}</style><linearGradient id="linear-gradient" x1="12.19" y1="267.25" x2="480.1" y2="267.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f8a746"/><stop offset="1" stop-color="#f7941d"/></linearGradient><filter id="drop-shadow-1" x="0" y="0" width="510.24" height="552.48" filterUnits="userSpaceOnUse"><feOffset dx="9" dy="9"/><feGaussianBlur result="blur" stdDeviation="7"/><feFlood flood-color="#000" flood-opacity=".4"/><feComposite in2="blur" operator="in"/><feComposite in="SourceGraphic"/></filter></defs><path class="cls-1" d="M480.1,66.39l-38.56,30.2-2.87-9.57L59.47,12.12l420.62,54.27ZM258.81,294.48c-.88,9.96-9.05,17.94-19.03,18.56-.51.03-.94.05-1.32.05-11.27,0-20.44-9.17-20.44-20.44,0-.65.04-1.33.1-2.03.97-9.91,8.87-17.62,18.8-18.34l4.74-.34,170.32-166.17-269.61,68.74h0S12.19,207.7,12.19,207.7v54.05l26-5.05v-28.8l81.81-20.86v130.1c0,20.91-17.01,37.92-37.92,37.92h-43.88s0-47.08,0-47.08l57.09-10.99v-26.48l-83.09,15.99v94.57l69.89-.02c35.25,0,63.92-28.67,63.92-63.92v-136.72l178.36-45.47-94.34,92.04c-20.19,3.68-35.73,20.25-37.76,41.1-.15,1.54-.23,3.07-.23,4.56,0,25.61,20.83,46.44,46.44,46.44.93,0,1.91-.03,2.96-.1,20.95-1.31,38.42-16.9,42.54-37.12l96.22-93.88-46.04,180.58h-136.74c-35.25,0-63.92,28.67-63.92,63.92v69.89h193.37l21.19-83.04h-26.83l-14.55,57.04h-147.17v-43.89c0-20.91,17.01-37.92,37.92-37.92h156.94l73.88-289.78-169,164.89-.42,4.8Z"/></svg></div></div><div class="message bot-message">{result["response"]["answer"]}</div></div></div>', unsafe_allow_html=True)
         
-        message = {'human': final_text, 'AI': result['response']['answer']}
-        st.session_state.msg_to_show.append(message)
+      message = {'human': final_text, 'AI': result['response']['answer']}
+      st.session_state.msg_to_show.append(message)
 
-        st.session_state.chat_history.append(HumanMessage(content=final_text))
-        st.session_state.chat_history.append(AIMessage(content=result['response']['answer']))
-        save_chat_to_redis(st.session_state.chat_history, user_id)
+      st.session_state.chat_history.append(HumanMessage(content=final_text))
+      st.session_state.chat_history.append(AIMessage(content=result['response']['answer']))
+      save_chat_to_redis(st.session_state.chat_history, user_id)
 
 
 st.write("")

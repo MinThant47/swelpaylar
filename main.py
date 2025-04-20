@@ -151,6 +151,26 @@ border-left-color: #e58013 !important;
 background-color: #e58013 !important;
 }
 
+.st-cp{
+border-bottom-color: #e58013 !important;
+}
+
+.st-co{
+border-top-color: #e58013 !important;
+}
+
+.st-cm{
+border-right-color: #e58013 !important;
+}
+
+.st-cn{
+border-left-color: #e58013 !important;
+}
+
+.st-emotion-cache-1f3w014:hover{
+color: #e58013 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 

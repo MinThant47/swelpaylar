@@ -123,6 +123,7 @@ Typical questions include:
 "ငွေပေးချေမှုနည်းလမ်းတွေဘာတွေရှိလဲ"
 "ဈေးနှုန်းက ဘာတွေလဲ" or "ဘယ်လောက်လဲ"
 "Design Sample တွေ ပြပေးလို့ရလား"
+"Content ရော ရေးပေးလား"
 
 The Logo involves logo related question such as Logo Packages and logo design fees
 The SocialAds involves social media (ads) design related question such as Social media Packages and fees

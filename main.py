@@ -262,7 +262,7 @@ if not st.session_state.initialized:
         st.session_state.cookie_check_attempts += 1
         elapsed = time.time() - st.session_state.cookie_check_start_time
         
-        if elapsed < 5 and st.session_state.cookie_check_attempts < 5:
+        if elapsed < 3 and st.session_state.cookie_check_attempts < 3:
             st.write(f"⏳ Loading your session... (attempt {st.session_state.cookie_check_attempts})")
             time.sleep(1)
             st.rerun()

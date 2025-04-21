@@ -210,43 +210,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# controller = CookieController()
-# user_id = controller.get("user_id")
-
-# # --- Session state setup
-# if "initialized" not in st.session_state:
-#     st.session_state.initialized = False
-# if "cookie_check_start_time" not in st.session_state:
-#     st.session_state.cookie_check_start_time = time.time()
-
-# # --- Cookie waiting logic
-# if not st.session_state.initialized:
-#     if user_id is None:
-#         elapsed = time.time() - st.session_state.cookie_check_start_time
-
-#         if elapsed < 3:
-#             st.write("⏳ Please wait...")
-#             time.sleep(1)  # Give browser time to set cookie
-#             st.rerun()
-#         else:
-#             # Still no cookie after 3 seconds – create a new user_id
-#             user_id = str(uuid.uuid4())
-#             controller.set("user_id", user_id)
-#             st.session_state.user_id = user_id
-#             st.session_state.initialized = True
-
-#     elif user_id == "":
-#         user_id = str(uuid.uuid4())
-#         controller.set("user_id", user_id)
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-
-#     else:
-#         st.session_state.user_id = user_id
-#         st.session_state.initialized = True
-# else:
-#     user_id = st.session_state.user_id
-
 # --- Session state setup
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
@@ -288,7 +251,8 @@ if not st.session_state.initialized:
                   )
                 except Exception:
                     # Handle case where cookies still can't be set
-                    st.warning("Using temporary session. Your chat history may not persist between visits.", icon="⚠️")
+                    st.warning("Unable to access cookies — your chat history may not be saved. ⚠️")
+                    st.write("If you’ve already interacted with the bot, try refreshing the page. It could be a connection issue.")
                 
                 st.session_state.user_id = user_id
                 st.session_state.initialized = True
@@ -307,7 +271,8 @@ if not st.session_state.initialized:
             user_id = str(uuid.uuid4())
             st.session_state.user_id = user_id
             st.session_state.initialized = True
-            st.warning("Unable to access cookies. Your chat history may not persist between visits.", icon="⚠️")
+            st.warning("Unable to access cookies — your chat history may not be saved. ⚠️")
+            st.write("If you’ve already interacted with the bot, try refreshing the page. It could be a connection issue.")
 else:
     # Already initialized, get from session state
     user_id = st.session_state.user_id

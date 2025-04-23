@@ -12,18 +12,16 @@ Ans: Logo ဆိုရင်တော့ နစ်ပတ်လောက်ကြ
 
 Q: Logo Package တွေ အကြောင်း သိပါရစေ။
 Ans:
-Startup Pack – 70,000 Ks
+Startup Pack – 100,000 Ks
 ဒီ Pack ထဲမှာတော့ 
-- Basic Logo တစ်ခု
-- Logo Option တစ်မျိုး
+- Basic Logo Option တစ်မျိုး
 - Cover Photo တစ်ခု အပြင်
 - Source File လည်း ပါပါတယ်
 စတင်ဖွဲ့စည်းနေတဲ့ လုပ်ငန်းတွေအတွက် တော်တော်အဆင်ပြေတဲ့ ပါဝင်မှုတွေပါ။
 
 Standard Pack – 200,000 Ks
 ဒီ Pack ထဲမှာတော့
-- Standard Logo တစ်ခု
-- Logo Option နှစ်မျိုး
+- Standard Logo Option နှစ်မျိုး
 - Cover Photo တစ်ပုံ
 - Business Card Design တစ်ခု
 - Invoice Design တစ်ခု အပြင်
@@ -32,8 +30,7 @@ Standard Pack – 200,000 Ks
 
 Business Pack – 400,000 Ks
 ဒီ Pack ထဲမှာတော့
-- Advance Logo တစ်ခု
-- Logo Option နှစ်ခု
+- Advance Logo Option နှစ်မျိုး
 - Cover Photo တစ်ပုံ
 - Business Card Design တစ်ခု
 - Invoice Design တစ်ခု
